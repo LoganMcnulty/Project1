@@ -1,20 +1,42 @@
-$(document).ready(function(){
+$(document).ready(function () {
 
-    function displayTitleInfo() {
+  function displayTitleInfo() {
 
-        var imdbID = 'tt5753856';
-        var queryURL = "https://www.omdbapi.com/?i=" + imdbID + "&apikey=trilogy";
+    //Expires Soon Query
+    var settings = {
+      "async": true,
+      "crossDomain": true,
+      "url": "https://unogs-unogs-v1.p.rapidapi.com/aaapi.cgi?q=get%3Aexp%3AUS&t=ns&st=adv&p=1",
+      "method": "GET",
+      "headers": {
+        "x-rapidapi-host": "unogs-unogs-v1.p.rapidapi.com",
+        "x-rapidapi-key": "e138a5e326mshee193d9b02e3dafp19cc7djsn4aa0ac2244fa"
+      }
+    }
 
-        // Creating an AJAX call for the specific imdbID being called
-        $.ajax({
-          url: queryURL,
-          method: "GET"
-        }).then(function(response) {
-            console.log(queryURL);
-            console.log(response);
-        });
-      };
+    $.ajax(settings).then(function (response) {
+      console.log(response);
+    });
 
-      displayTitleInfo();
+    //New Releases Query
+    var settings = {
+      "async": true,
+      "crossDomain": true,
+      "url": "https://unogs-unogs-v1.p.rapidapi.com/aaapi.cgi?q=get%3Anew7%3AUS&p=1&t=ns&st=adv",
+      "method": "GET",
+      "headers": {
+        "x-rapidapi-host": "unogs-unogs-v1.p.rapidapi.com",
+        "x-rapidapi-key": "e138a5e326mshee193d9b02e3dafp19cc7djsn4aa0ac2244fa"
+      }
+    }
 
-  });
+    $.ajax(settings).done(function (response) {
+      console.log(response);
+    });
+
+
+  };
+
+  displayTitleInfo();
+
+});
