@@ -1,0 +1,58 @@
+body{
+    background: url('../Images/placeholder.jpg') no-repeat center center fixed;
+    -webkit-background-size: auto;
+    -moz-background-size: auto;
+    background-size: auto;
+    -o-background-size: auto;
+  }
+
+#title{
+    margin:3%;
+    text-align:center;
+    text-shadow: -2px 0 #8ec3eb, 0 2px #8ec3eb, 2px 0 #8ec3eb, 0 -2px #8ec3eb;
+    color:white;
+    font-weight: bold;
+    text-decoration:underline;
+    font-size:60px;
+    line-height:80px;
+    font-family: 'Space Mono', monospace;
+}
+
+#about{
+    /* background:whitesmoke; */
+    opacity: .9;
+    color:whitesmoke;
+    border: solid red 3px;
+    padding:1%;
+    border-radius:15px;
+}
+
+#whatsNew_whatsLeaving{
+    padding:4%;
+}
+
+#resultsContainer{
+    background:#7e9a9a;
+    border: solid #8ec3eb 3px;
+    margin: 3% 0 3%;
+    padding:1%;
+    border-radius:15px;
+}
+
+.card{
+    width: 10rem;
+    float:left;
+}
+
+.card-body{
+    background: #8ec3eb;
+    color:black;
+}
+
+#criteriaContainer{
+    background:#7e9a9a;
+    border: solid #8ec3eb 3px;
+    height:150px;
+    border-radius:15px;
+    padding:1%;
+}
