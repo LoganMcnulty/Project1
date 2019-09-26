@@ -19,7 +19,6 @@ body{
 }
 
 #about{
-    /* background:whitesmoke; */
     opacity: .9;
     color:whitesmoke;
     border: solid red 3px;
@@ -31,12 +30,24 @@ body{
     padding:4%;
 }
 
-#resultsContainer{
-    background:#7e9a9a;
-    border: solid #8ec3eb 3px;
-    margin: 3% 0 3%;
-    padding:1%;
-    border-radius:15px;
+#resultsRow{
+    margin-top: 3%;
+}
+
+#tableBody{
+    background:#8ec3eb;
+}
+
+#tableHeader{
+    font-size:2em;
+    font-weight:bold;
+    background: #6c757d;
+    color:white;
+}
+
+th{
+    font-size: 1.5em;
+    font-weight:bold;
 }
 
 .card{
@@ -47,6 +58,16 @@ body{
 .card-body{
     background: #8ec3eb;
     color:black;
+}
+
+#titleContent, #titleIMDBRating, #titleIMDBPopularity{
+    font-size: 1em;
+    padding-top:5%;
+}
+
+#titlePoster{
+    width:10em;
+
 }
 
 #criteriaContainer{
