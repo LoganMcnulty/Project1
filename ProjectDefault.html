@@ -41,13 +41,39 @@
 
     <!-- Do you want what's new, or what's leaving? -->
       <div class="col-5" id="whatsNew_whatsLeaving">
-        <button type="button" class="btn btn-primary btn-lg btn-block" style="background:black; color:red">What's New?</button>
-        <button type="button" class="btn btn-secondary btn-lg btn-block">What's Leaving?</button>
+        <button type="button" class="btn btn-primary btn-lg btn-block" id="newContent" style="background:black; color:red">What's New?</button>
+        <button type="button" class="btn btn-secondary btn-lg btn-block" id="expiringContent">What's Leaving?</button>
       </div>
-</div>
+  </div>
 
-      <!-- Results Row-->
-      <div class="row justify-content-around" id="resultsRow"></div>
+  <!-- Results Row-->
+  <div class="row justify-content-around" id="resultsRow">
+    <div class="col-lg-12">
+      <div class="card card-default" style="margin:2% 0 5%; width:100%">
+        <div class="card-header" id="tableHeader">Available Titles</div>
+        <div class="card-body" id="tableBody">
+            <table class="table" id="empTable">
+                <thead>
+                  <tr>
+                    <th scope="col">Title Name</th>
+                    <th scope="col">Poster</th>
+                    <th scope="col">Genre</th>
+                    <th scope="col">Rated</th>
+                    <th scope="col">Run Time</th>
+                    <th scope="col">Year</th>
+                    <th scope="col">IMDB Rating</th>
+                    <th scope="col">IMDB Popularity</th>
+                    <th scope="col">Watched?</th>
+                  </tr>
+                </thead>
+                <tbody id="titleContainer">
+                    <!-- <tr id ="titleRow"></tr> -->
+                </tbody>
+              </table>
+        </div>
+      </div>
+    </div>
+  </div>
 
 <!-- Bootstrap container Ends here -->
 </div>
@@ -62,6 +88,8 @@
 
 <!-- Script -->
 <script id="themeSelectorJS" type="text/javascript" src="Assets/JavaScript/app.js"></script>
+
+<script src="https://cdn.jsdelivr.net/momentjs/2.12.0/moment.min.js"></script>
 
 </body>
 </html>
