@@ -1,8 +1,9 @@
 $(document).ready(function () {
 
-  var netflixExpiresLocal = JSON.parse(localStorage.getItem("netflixExpireSoon"));
-  var netflixNewLocal = JSON.parse(localStorage.getItem("netflixNew"));
-  console.log(netflixExpiresLocal);
+    var netflixExpiresLocal = JSON.parse(localStorage.getItem("netflixExpireSoon"));
+    var netflixNewLocal = JSON.parse(localStorage.getItem("netflixNew"));
+  
+    console.log(netflixExpiresLocal);
 
   $('#newContent').on('click', loadNewContent);
   $('#expiringContent').on('click', loadExpiringContent);
@@ -117,7 +118,8 @@ $(document).ready(function () {
   function addContentRow(omdbObject, itemIndex) {
     var newRow = $('<tr data-toggle="collapse" data-target="#collapse' + itemIndex + '" class="clickable">');
     newRow.append($('<td style="font-weight:bold;">').text(omdbObject.Title));
-
+    console.log(omdbObject);
+    
     if (omdbObject.Poster === "N/A"){
       var posterTD =$("<td>");
       var missingPosterImageLink = 'Assets/Images/noimage.jpg';
@@ -140,19 +142,11 @@ $(document).ready(function () {
     newRow.append($("<td>").text(omdbObject.imdbRating));
     newRow.append($("<td>").text(omdbObject.imdbVotes));
 
-
     var newWatchedTD = $("<td>");
     newWatchedTD.append($('<input type="checkbox">'));
     newRow.append(newWatchedTD);
     $("#titleContainer").append(newRow);
 
-    // var newRowPlot = $("<tr>");
-    // var newPlotTD = $('<td colspan="7">');
-    // newPlotTD.append($('<div id="collapse' + itemIndex + '" class="collapse">').text(omdbOject.Plot));
-    // newRowPlot.append(newPlotTD)
-    // $("tbody").append(newRowPlot);
-
   };
-
 
 });
