@@ -1,4 +1,5 @@
 $(document).ready(function () {
+
   var netflixExpiresLocal = JSON.parse(localStorage.getItem("netflixExpireSoon"));
   var netflixNewLocal = JSON.parse(localStorage.getItem("netflixNew"));
   console.log(netflixExpiresLocal);
@@ -8,9 +9,8 @@ $(document).ready(function () {
 
   function loadExpiringContent() {
     //resets table body
-    $("#titleContainer").remove();
-    var tableBody = $("<tbody>").attr("id", "titleContainer");
-    $("#empTable").append(tableBody);
+    $('#empTable').DataTable().destroy();
+    $("#empTable tbody").empty();
     if (netflixExpiresLocal == null || moment().format("MM/DD/YY") > moment(netflixExpiresLocal.timeStamp).add(1, 'days')) {
       //Expires Soon Query
       var settingsExpiring = {
@@ -54,15 +54,16 @@ $(document).ready(function () {
           addContentRow(netflixExpiresLocal.ITEMS[i].omdbData, i);
         }
       }
+      $("#empTable").DataTable();
+      $(".dataTables_length").addClass("bs-select");
     }
   }
 
   //New Releases Query
   function loadNewContent() {
     //resets table body
-    $("#titleContainer").remove();
-    var tableBody = $("<tbody>").attr("id", "titleContainer");
-    $("#empTable").append(tableBody);
+    $('#empTable').DataTable().destroy();
+    $("#empTable tbody").empty();
     if (netflixNewLocal == null || moment().format("MM/DD/YY") > moment(netflixNewLocal.timeStamp).add(1, 'days')) {
       var daysSinceRelease = 7;
       var resultsPage = 1;
@@ -107,6 +108,8 @@ $(document).ready(function () {
           addContentRow(netflixNewLocal.ITEMS[i].omdbData, i);
         }
       }
+      $("#empTable").DataTable();
+      $(".dataTables_length").addClass("bs-select");
     }
   }
 
@@ -151,19 +154,5 @@ $(document).ready(function () {
 
   };
 
-  // function missingPoster(xyz){
-    if (omdbObject.Poster === "N/A"){
-      var posterTD =$("<td>");
-      var missingPosterImage = 'Assets/Images/noimage.jpg';
-      posterTD.append(missingPosterImage);
-      newRow.append(posterTD);
-    }
-    else{
-      var posterTD =$("<td>");
-      var posterImage = omdbObject.Poster;
-      posterTD.append(posterImage);
-      newRow.append(posterTD);
-    }
-  // };
 
 });
