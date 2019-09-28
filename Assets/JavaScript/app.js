@@ -9,9 +9,8 @@ $(document).ready(function () {
 
   function loadExpiringContent() {
     //resets table body
-    $("#titleContainer").remove();
-    var tableBody = $("<tbody>").attr("id", "titleContainer");
-    $("#empTable").append(tableBody);
+    $('#empTable').DataTable().destroy();
+    $("#empTable tbody").empty();
     if (netflixExpiresLocal == null || moment().format("MM/DD/YY") > moment(netflixExpiresLocal.timeStamp).add(1, 'days')) {
       //Expires Soon Query
       var settingsExpiring = {
@@ -63,9 +62,8 @@ $(document).ready(function () {
   //New Releases Query
   function loadNewContent() {
     //resets table body
-    $("#titleContainer").remove();
-    var tableBody = $("<tbody>").attr("id", "titleContainer");
-    $("#empTable").append(tableBody);
+    $('#empTable').DataTable().destroy();
+    $("#empTable tbody").empty();
     if (netflixNewLocal == null || moment().format("MM/DD/YY") > moment(netflixNewLocal.timeStamp).add(1, 'days')) {
       var daysSinceRelease = 7;
       var resultsPage = 1;
