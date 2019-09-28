@@ -1,4 +1,5 @@
 $(document).ready(function () {
+
   var netflixExpiresLocal = JSON.parse(localStorage.getItem("netflixExpireSoon"));
   var netflixNewLocal = JSON.parse(localStorage.getItem("netflixNew"));
   console.log(netflixExpiresLocal);
@@ -54,6 +55,8 @@ $(document).ready(function () {
           addContentRow(netflixExpiresLocal.ITEMS[i].omdbData, i);
         }
       }
+      $("#empTable").DataTable();
+      $(".dataTables_length").addClass("bs-select");
     }
   }
 
@@ -107,6 +110,8 @@ $(document).ready(function () {
           addContentRow(netflixNewLocal.ITEMS[i].omdbData, i);
         }
       }
+      $("#empTable").DataTable();
+      $(".dataTables_length").addClass("bs-select");
     }
   }
 
@@ -151,19 +156,5 @@ $(document).ready(function () {
 
   };
 
-  // function missingPoster(xyz){
-    if (omdbObject.Poster === "N/A"){
-      var posterTD =$("<td>");
-      var missingPosterImage = 'Assets/Images/noimage.jpg';
-      posterTD.append(missingPosterImage);
-      newRow.append(posterTD);
-    }
-    else{
-      var posterTD =$("<td>");
-      var posterImage = omdbObject.Poster;
-      posterTD.append(posterImage);
-      newRow.append(posterTD);
-    }
-  // };
 
 });
