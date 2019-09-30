@@ -29,7 +29,7 @@ $(document).ready(function () {
         }
       }
 
-      $.ajax(settingsExpiring).done(function (netflixResponse) {
+      $.ajax(settingsExpiring).then(function (netflixResponse) {
         var netflixExpiresSoon = netflixResponse;
         
         if(netflixExpiresLocal != null) {
@@ -52,9 +52,7 @@ $(document).ready(function () {
               addContentRow(omdbResponse, i);
             });
           }
-        }
-        $("#empTable").DataTable();
-        $(".dataTables_length").addClass("bs-select");
+        }   
         netflixExpiresLocal = netflixExpiresSoon;
       });
     } else {
@@ -63,6 +61,7 @@ $(document).ready(function () {
           addContentRow(netflixExpiresLocal.ITEMS[i].omdbData, i);
         }
       }
+
       $("#empTable").DataTable();
       $(".dataTables_length").addClass("bs-select");
     }
@@ -113,8 +112,6 @@ $(document).ready(function () {
             });
           }
         }
-        $("#empTable").DataTable();
-        $(".dataTables_length").addClass("bs-select");
         netflixNewLocal = netflixNew;
       });
     } else {
@@ -129,6 +126,13 @@ $(document).ready(function () {
 
     $("#tableHeader").text("New Content");
   }
+
+  $(document).ajaxStop(function() {
+    setTimeout(function(){
+      $("#empTable").DataTable();
+      $(".dataTables_length").addClass("bs-select");
+    },200);
+  });
 
   //adds content rows
   function addContentRow(omdbObject, itemIndex) {
