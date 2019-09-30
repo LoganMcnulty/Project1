@@ -1,0 +1,192 @@
+<!DOCTYPE html>
+<html lang="en-us">
+
+<head>
+
+  <meta charset="UTF-8">
+  <title>About the Coders</title>
+
+  <!-- Bootstrap -->
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
+  <!-- jQuery -->
+  <script src="https://code.jquery.com/jquery.js"></script>
+  <!-- LINKS FOR FIREBASE GO HERE -->
+  <script src="https://www.gstatic.com/firebasejs/6.0.4/firebase-app.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/6.0.4/firebase-database.js"></script>
+  <link rel = "stylesheet" type = "text/css" href = "Assets2/style.css"/>
+  <link rel = "images" href = "Assets2/image/"/>
+  <link href="https://fonts.googleapis.com/css?family=Cabin|Merriweather|Varela+Round&display=swap" rel="stylesheet">
+</head>
+<body>
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark static-top">
+        <div class="container">
+            <a class="navbar-brand" href="https://www.netflix.com/browse">
+                <img class = "netflixLogo" src="https://assets.brand.microsites.netflix.io/assets/1ed15bca-b389-11e7-9274-06c476b5c346_cm_800w.png?v=11" alt="">
+            </a>
+                  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
+                        <span class="navbar-toggler-icon"></span>
+                  </button>
+                  <div class="collapse navbar-collapse" id="navbarResponsive">
+                    <ul class="navbar-nav ml-auto">
+                      <li class="nav-item active">
+                        <a class="nav-link" href="ProjectDefault.html">Go back to NetFix
+                              <span class="sr-only">(current)</span>
+                        </a>
+                    </li>
+                  </div>
+                </div>
+              </nav>
+        
+    <div class="row"> 
+        <div class="span12"> </br></div>
+    </div>
+
+    <div class="row">
+        <div class="col-md-12">
+            <div class="profiles-gate-container">
+                <div class="profile-gate-label">Who's Coding?</div>
+                    <ul class="choose-profile">
+            </div>
+        </div>
+    </div>
+    
+    <div class="row">
+        <div class="col-md-2">
+         </div>
+        <div class="col-md-2">
+            <li class="profile">
+             <div>
+                <a class="profile-link" tabindex="0" href="#" id = "button1" data-uia="action-select-profile+primary">
+                    <div class="avatar-wrapper">
+                        <div class="profile-icon">
+                                <img src="https://mir-s3-cdn-cf.behance.net/project_modules/disp/bf6e4a33850498.56ba69ac3064f.png" class = "img-fluid" alt="Logan's Profile">
+                            </div>
+                        </div>
+                        <span class="profile-name">Patrick</span>
+                    </a>
+                </div>
+            </li> 
+        </div> 
+        <div class="col-md-2">
+            <li class="profile">
+                <div>
+                 <a class="profile-link" tabindex="0" href="#" id = "button2" data-uia="action-select-profile+primary">
+                 <div class="avatar-wrapper">
+                   <div class="profile-icon">
+                        <img src="https://pm1.narvii.com/6915/b750d3766167c6d41dfd8f55e45f72631d100409r1-320-320v2_hq.jpg" class = "img-fluid" alt="Patrick's Profile"> 
+                  </div>
+                </div>
+                   <span class="profile-name">Logan</span>
+                   </a>
+                </div>
+            </li>
+        </div>
+        <div class="col-md-2">
+            <li class="profile">
+                    <div>
+                        <a class="profile-link" tabindex="0" href="#" id = "button3" data-uia="action-select-profile+primary">
+                            <div class="avatar-wrapper">
+                                <div class="profile-icon"> 
+                                    <img src="https://i.pinimg.com/originals/0d/dc/ca/0ddccae723d85a703b798a5e682c23c1.png" class = "img-fluid" alt="Logan's Profile">
+                                </div>
+                         </div>
+                        <span class="profile-name">Thomas</span>
+                    </a>
+                </div>
+            </li>
+        </div>
+        <div class="col-md-2">
+            <li class="profile">
+                <div id = 'comment'>
+                    <a class="profile-link" tabindex="0" href="#" id = "button4" data-uia="action-select-profile+primary">
+                        <div class="avatar-wrapper">
+                            <div class="profile-icon"> 
+                                <img src="Assets2/image/Add Profile.PNG" class = "img-fluid" alt="Comment Section">
+                        </div>
+                    </div>
+                    <span class="comment-name">Leave a comment</span>
+                </a>
+            </div>
+        </li>
+    </div>   
+        <div class="row">
+                <div class="col-md-2">
+        </div>
+    </div> 
+</div>
+
+<div class="bg-modal1">
+        <div class="modal-contents1">
+            <form action="">
+                <div class = "close">+</div>
+               <img src="Assets2/image/patrick.jpg" alt="Patrick's Pictures">
+            <br>
+            <br>
+               <p>
+                   <strong>Name:</strong> Patrick O'Neill
+                   <br>
+                   <strong>TV Show:</strong> King of the Hill
+                   <br>
+                    <strong>Movie:</strong> The Chipmunk Adventures
+                    <br>
+                    <strong>Bio:</strong> I'm 32, married, and have a chihuahua named JP.  I attended college at NC State and received a degree in Paper Science Engineering.  I worked in paper mills all over the world for 6 years before switching gears, learning the basics of modern coding, and finding a developer position at a local software company.</p>
+            </form>
+        </div>
+        </div>
+
+<div class="bg-modal2">
+        <div class="modal-contents2">
+            <form action="">
+                <div class = "close2">+</div>
+                <img src="Assets2/image/Logan.jpg" alt="Patrick's Pictures">
+                <br>
+                <br>
+               <p>
+                    <strong>Name:</strong> Logan McNulty
+                    <br>
+                   <strong>TV Show:</strong> House M.D.
+                   <br>
+                    <strong>Movie:</strong> Interstellar
+                    <br>
+                    <strong>Bio:</strong> Is a North Carolina native, born and raised. Enjoys exercising, speculating in the stock market, spending time with family and friends, riding on his motorcycle, and computer programming. Has a B.S. degree in business management from North Carolina State University, and is currently employed as a Financial Analyst at ZM Financial Systems.</p>
+            </form>
+        </div>
+        </div>
+        
+<div class="bg-modal3">
+     <div class="modal-contents3">
+        <form action="">
+             <div class = "close3">+</div>
+             <img src="Assets2/image/thomas.jpg" alt="Patrick's Pictures">
+                <br>
+                <br>
+                <p>
+                <strong>Name:</strong> Thomas Coughlin
+                <br>
+                 <strong>TV Show:</strong> Psych
+                    <br>
+                     <strong>Movie:</strong> The Lion King
+                    <br>
+                    <strong>Bio:</strong> I am a graduate of Elon University from Cincinnati, Ohio but am currently living in North Carolina. I have a passion for Digital Marketing and currently work as a Technical SEO Analyst at ROI Revolution. When I am not at work, I love to watch and play sports, hang out with friends, and sing. I am currently taking a Coding course through UNC Chapel-Hill and look forward to leveraging what I learn in my Digital Marketing career. </p>
+                </form>
+                </div>
+                </div>
+
+<div class="bg-modal4">
+<div class="modal-contents4">
+    <form action="">
+        <div class = "close4">+</div>
+        <br>
+        <h2>Leave us a comment!</h2>
+        <input type="text" placeholder="name">
+        <input type="text" placeholder="email">
+        <input type="text" placeholder="comment">
+        <a href= "" class="button">Submit</a>
+    </form>
+</div>
+</div>
+</body> 
+<script type="text/javascript" src="Assets2/code.js">
+</script>
+  
+</html>
