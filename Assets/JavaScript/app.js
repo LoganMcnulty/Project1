@@ -7,7 +7,6 @@ $(document).ready(function () {
   if(savedLocal == null) {
     savedLocal = [];
   }
-  console.log(netflixExpiresLocal);
 
   $('#newContent').on('click', loadNewContent);
   $('#expiringContent').on('click', loadExpiringContent);
@@ -31,9 +30,8 @@ $(document).ready(function () {
       }
 
       $.ajax(settingsExpiring).done(function (netflixResponse) {
-        console.log(netflixResponse);
-
         var netflixExpiresSoon = netflixResponse;
+        
         if(netflixExpiresLocal != null) {
           netflixExpiresLocal.timeStamp = moment().format("MM/DD/YY");
         }
@@ -70,7 +68,7 @@ $(document).ready(function () {
     }
 
     $("#tableHeader").text("Expiring Content");
-  }
+  } 
 
   //New Releases Query
   function loadNewContent() {
@@ -108,7 +106,6 @@ $(document).ready(function () {
               url: queryURL,
               method: "GET"
             }).then(function (omdbResponse) {
-              console.log(omdbResponse);
               netflixNew.ITEMS[i].omdbData = omdbResponse;
               localStorage.setItem('netflixNew', JSON.stringify(netflixNew));
 
@@ -135,41 +132,41 @@ $(document).ready(function () {
 
   //adds content rows
   function addContentRow(omdbObject, itemIndex) {
-    var newRow = $('<tr data-toggle="collapse" data-target="#collapse' + itemIndex + '" class="clickable">');
-    newRow.append($('<td style="font-weight:bold;">').text(omdbObject.Title));
-    console.log(omdbObject);
-    
-    if (omdbObject.Poster === "N/A"){
-      var posterTD =$("<td>");
-      var missingPosterImageLink = 'Assets/Images/noimage.jpg';
-      var missingPosterImg = $("<img>").attr("id","titlePoster").attr("src",missingPosterImageLink);
-      posterTD.append(missingPosterImg);
-      newRow.append(posterTD);
-    }
-    else{
-      var posterTD =$("<td>");
-      var posterImage = omdbObject.Poster;
-      var posterImg = $("<img>").attr("id","titlePoster").attr("src",posterImage);
-      posterTD.append(posterImg);
-      newRow.append(posterTD);
-    }
+    if(omdbObject.Response == "True") {
+      var newRow = $('<tr data-toggle="collapse" data-target="#collapse' + itemIndex + '" class="clickable">');
+      newRow.append($('<td style="font-weight:bold;">').text(omdbObject.Title));
+      
+      if (omdbObject.Poster === "N/A"){
+        var posterTD =$("<td>");
+        var missingPosterImageLink = 'Assets/Images/noimage.jpg';
+        var missingPosterImg = $("<img>").attr("id","titlePoster").attr("src",missingPosterImageLink);
+        posterTD.append(missingPosterImg);
+        newRow.append(posterTD);
+      }
+      else{
+        var posterTD =$("<td>");
+        var posterImage = omdbObject.Poster;
+        var posterImg = $("<img>").attr("id","titlePoster").attr("src",posterImage);
+        posterTD.append(posterImg);
+        newRow.append(posterTD);
+      }
 
-    newRow.append($("<td>").text(omdbObject.Genre));
-    newRow.append($("<td>").text(omdbObject.Rated));
-    newRow.append($("<td>").text(omdbObject.Runtime));
-    newRow.append($("<td>").text(omdbObject.Year));
-    newRow.append($("<td>").text(omdbObject.imdbRating));
-    newRow.append($("<td>").text(omdbObject.imdbVotes));
+      newRow.append($("<td>").text(omdbObject.Genre));
+      newRow.append($("<td>").text(omdbObject.Rated));
+      newRow.append($("<td>").text(omdbObject.Runtime));
+      newRow.append($("<td>").text(omdbObject.Year));
+      newRow.append($("<td>").text(omdbObject.imdbRating));
+      newRow.append($("<td>").text(omdbObject.imdbVotes));
 
-    var newWatchedTD = $("<td>");
-    var newCheckbox = $('<input type="checkbox" arrayIndex="'+itemIndex+'">');
-    if(savedLocal.findIndex(function(savedHold) {return savedHold.imdbid == omdbObject.imdbID;}) != -1) {
-      newCheckbox.prop('checked', true);
+      var newWatchedTD = $("<td>");
+      var newCheckbox = $('<input type="checkbox" arrayIndex="'+itemIndex+'">');
+      if(savedLocal.findIndex(function(savedHold) {return savedHold.imdbid == omdbObject.imdbID;}) != -1) {
+        newCheckbox.prop('checked', true);
+      }
+      newWatchedTD.append(newCheckbox);
+      newRow.append(newWatchedTD);
+      $("#titleContainer").append(newRow);
     }
-    newWatchedTD.append(newCheckbox);
-    newRow.append(newWatchedTD);
-    $("#titleContainer").append(newRow);
-
   };
 
   function loadSavedContent() {
