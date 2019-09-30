@@ -1,0 +1,204 @@
+.netflixLogo {
+    vertical-align: middle;
+   border-style: none;
+   height: 125px;
+}
+
+.nav-link {
+   display: block;
+   padding: .5rem 1rem;
+   font-size: 30px;
+   font-family: 'Merriweather', serif;
+}
+html, body {
+   background: #141414;
+   color: #fff;
+   font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+   line-height: 1.2;
+   user-select: none;
+   cursor: default;
+}
+
+.profile-gate-label {
+   text-align: center;
+   font-size: 50px;
+}
+
+.row {
+   height: 100px;
+}
+
+
+li {
+   list-style-type: none;
+}
+
+.profile-name {
+   text-align: center;
+   display: block;
+   font-size: 25px;
+   color: #fff;
+ 
+}
+.comment-name {
+   text-align: center;
+   display: block;
+   padding: 16px;
+   font-size: 25px;
+   color: #fff;
+}
+
+   img{
+      cursor: pointer;  
+  }
+  
+.profile-icon:hover{
+   border-style: solid;
+  border-width: 10px;
+    border-color: white;
+    outline: 0;
+    -webkit-box-shadow: inset 5px rgba(0,0,0,.075), 0 0 8px rgba(102, 175, 233, 0.6);
+    box-shadow: inset 5px rgba(0,0,0,.075), 0 0 8px rgba(102, 175, 233, 0.6);
+  }
+
+input {
+   width: 60%;
+   display: block;
+   margin: 15px auto;
+
+}
+h2{
+   color: black;
+   text-align: center;
+   font-family: 'Cabin', sans-serif;
+}
+.close{
+   position: absolute;
+   top: 0;
+   right: 14px;
+   font-size: 42px;
+   transform: rotate(45deg);
+   color: black;
+}
+.close2{
+   position: absolute;
+   top: 0;
+   right: 14px;
+   font-size: 42px;
+   transform: rotate(45deg);
+   color: black;
+}
+
+.close3{
+   position: absolute;
+   top: 0;
+   right: 14px;
+   font-size: 42px;
+   transform: rotate(45deg);
+   color: black;
+}
+.close4{
+   position: absolute;
+   top: 0;
+   right: 14px;
+   font-size: 42px;
+   transform: rotate(45deg);
+   color: black;
+}
+
+
+
+/* Css for created forms */
+
+.bg-modal1 {
+   width: 100%;
+   height: 100%;
+   background-color: rgba(0,0,0,0.7);
+   position: absolute;
+   top: 0;
+ display: flex;
+ justify-content: center;
+ align-items: center;
+ display: none;
+  }
+
+  .modal-contents1{
+   width: 500px;
+   height: 450px;
+   background-color: white;
+   border-radius: 5px;
+   text-align: center;
+   padding: 20px;
+   position: relative;
+}
+
+
+  .bg-modal2 {
+   width: 100%;
+   height: 100%;
+   background-color: rgba(0,0,0,0.7);
+   position: absolute;
+   top: 0;
+ display: flex;
+ justify-content: center;
+ align-items: center;
+ display: none;
+  }
+
+  .modal-contents2{
+   width: 500px;
+   height: 450px;
+   background-color: white;
+   border-radius: 5px;
+   text-align: center;
+   padding: 20px;
+   position: relative;
+}
+
+  .bg-modal3 {
+     width: 100%;
+     height: 100%;
+     background-color: rgba(0,0,0,0.7);
+     position: absolute;
+     top: 0;
+   display: flex;
+   justify-content: center;
+   align-items: center;
+   display: none;
+  }
+  .modal-contents3{
+     width: 500px;
+     height: 450px;
+     background-color: white;
+     border-radius: 5px;
+     text-align: center;
+     padding: 20px;
+     position: relative;
+  }
+
+  .bg-modal4 {
+   width: 100%;
+   height: 100%;
+   background-color: rgba(0,0,0,0.7);
+   position: absolute;
+   top: 0;
+ display: flex;
+ justify-content: center;
+ align-items: center;
+ display: none;
+  }
+
+  .modal-contents4{
+   width: 500px;
+   height: 300px;
+   background-color: white;
+   border-radius: 5px;
+   text-align: center;
+   padding: 20px;
+   position: relative;
+}
+
+p {
+   color: black;
+   font-family: 'Cabin', sans-serif;
+}
