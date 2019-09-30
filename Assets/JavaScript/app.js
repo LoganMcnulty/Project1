@@ -1,18 +1,23 @@
 $(document).ready(function () {
 
-    var netflixExpiresLocal = JSON.parse(localStorage.getItem("netflixExpireSoon"));
-    var netflixNewLocal = JSON.parse(localStorage.getItem("netflixNew"));
-  
-    console.log(netflixExpiresLocal);
+  var netflixExpiresLocal = JSON.parse(localStorage.getItem("netflixExpireSoon"));
+  var netflixNewLocal = JSON.parse(localStorage.getItem("netflixNew"));
+  var savedLocal = JSON.parse(localStorage.getItem("savedList"));
+  //checks if user has a savedLocal storage and if not it creates one
+  if(savedLocal == null) {
+    savedLocal = [];
+  }
+  console.log(netflixExpiresLocal);
 
   $('#newContent').on('click', loadNewContent);
   $('#expiringContent').on('click', loadExpiringContent);
+  $('#savedContent').on('click', loadSavedContent);
 
   function loadExpiringContent() {
     //resets table body
     $('#empTable').DataTable().destroy();
     $("#empTable tbody").empty();
-    if (netflixExpiresLocal == null || moment().format("MM/DD/YY") > moment(netflixExpiresLocal.timeStamp).add(1, 'days')) {
+    if (netflixExpiresLocal == null || moment().format("MM/DD/YY") > netflixExpiresLocal.timeStamp) {
       //Expires Soon Query
       var settingsExpiring = {
         "async": true,
@@ -29,7 +34,9 @@ $(document).ready(function () {
         console.log(netflixResponse);
 
         var netflixExpiresSoon = netflixResponse;
-        netflixExpiresSoon.timeStamp = moment().format("MM/DD/YY");
+        if(netflixExpiresLocal != null) {
+          netflixExpiresLocal.timeStamp = moment().format("MM/DD/YY");
+        }
 
         for (let i = 0; i < netflixResponse.ITEMS.length; i++) {
           if (netflixResponse.ITEMS[i].imdbid != "") {
@@ -48,6 +55,9 @@ $(document).ready(function () {
             });
           }
         }
+        $("#empTable").DataTable();
+        $(".dataTables_length").addClass("bs-select");
+        netflixExpiresLocal = netflixExpiresSoon;
       });
     } else {
       for (let i = 0; i < netflixExpiresLocal.ITEMS.length; i++) {
@@ -58,6 +68,8 @@ $(document).ready(function () {
       $("#empTable").DataTable();
       $(".dataTables_length").addClass("bs-select");
     }
+
+    $("#tableHeader").text("Expiring Content");
   }
 
   //New Releases Query
@@ -65,7 +77,7 @@ $(document).ready(function () {
     //resets table body
     $('#empTable').DataTable().destroy();
     $("#empTable tbody").empty();
-    if (netflixNewLocal == null || moment().format("MM/DD/YY") > moment(netflixNewLocal.timeStamp).add(1, 'days')) {
+    if (netflixNewLocal == null || moment().format("MM/DD/YY") > netflixNewLocal.timeStamp) {
       var daysSinceRelease = 7;
       var resultsPage = 1;
       var settingsNew = {
@@ -81,9 +93,11 @@ $(document).ready(function () {
 
       $.ajax(settingsNew).done(function (netflixResponse) {
         console.log(netflixResponse);
-
-        var netflixNewLocal = netflixResponse;
-        netflixNewLocal.timeStamp = moment().format("MM/DD/YY");
+  
+        var netflixNew = netflixResponse;
+        if(netflixNewLocal != null){
+          netflixNewLocal.timeStamp = moment().format("MM/DD/YY");
+        }
 
         for (let i = 0; i < netflixResponse.ITEMS.length; i++) {
           if (netflixResponse.ITEMS[i].imdbid != "") {
@@ -95,13 +109,16 @@ $(document).ready(function () {
               method: "GET"
             }).then(function (omdbResponse) {
               console.log(omdbResponse);
-              netflixNewLocal.ITEMS[i].omdbData = omdbResponse;
-              localStorage.setItem('netflixNew', JSON.stringify(netflixNewLocal));
+              netflixNew.ITEMS[i].omdbData = omdbResponse;
+              localStorage.setItem('netflixNew', JSON.stringify(netflixNew));
 
               addContentRow(omdbResponse, i);
             });
           }
         }
+        $("#empTable").DataTable();
+        $(".dataTables_length").addClass("bs-select");
+        netflixNewLocal = netflixNew;
       });
     } else {
       for (let i = 0; i < netflixNewLocal.ITEMS.length; i++) {
@@ -112,6 +129,8 @@ $(document).ready(function () {
       $("#empTable").DataTable();
       $(".dataTables_length").addClass("bs-select");
     }
+
+    $("#tableHeader").text("New Content");
   }
 
   //adds content rows
@@ -143,10 +162,65 @@ $(document).ready(function () {
     newRow.append($("<td>").text(omdbObject.imdbVotes));
 
     var newWatchedTD = $("<td>");
-    newWatchedTD.append($('<input type="checkbox">'));
+    var newCheckbox = $('<input type="checkbox" arrayIndex="'+itemIndex+'">');
+    if(savedLocal.findIndex(function(savedHold) {return savedHold.imdbid == omdbObject.imdbID;}) != -1) {
+      newCheckbox.prop('checked', true);
+    }
+    newWatchedTD.append(newCheckbox);
     newRow.append(newWatchedTD);
     $("#titleContainer").append(newRow);
 
   };
+
+  function loadSavedContent() {
+    $('#empTable').DataTable().destroy();
+    $("#empTable tbody").empty();
+    for (let i = 0; i < savedLocal.length; i++) {
+      if (savedLocal[i].imdbid != "") {
+        addContentRow(savedLocal[i].omdbData, i);
+      }
+    }
+    $("#empTable").DataTable();
+    $(".dataTables_length").addClass("bs-select");
+
+    $("#tableHeader").text("Saved Content");
+  }
+
+  $(document.body).on("click", "input", function() {
+    //captures arrayIndex of object item from checkbox
+    var arrayIndex = $(this).attr("arrayIndex");
+    var selectedBtnText = $("#tableHeader").text()
+    //gets Object to save from the main Object
+    if(selectedBtnText == "Expiring Content") {
+      var saveObject = netflixExpiresLocal.ITEMS[arrayIndex];
+    } else if(selectedBtnText == "New Content") {
+      var saveObject = netflixNewLocal.ITEMS[arrayIndex];
+    } else if(selectedBtnText == "Saved Content") {
+      var saveObject = savedLocal[arrayIndex];
+    }
+    //if row is being checked then add item to the saved local storage
+    if($(this).is(":checked")) {
+      //sets object position
+      savedLocal[savedLocal.length] = saveObject;
+      localStorage.setItem('savedList', JSON.stringify(savedLocal));
+    } else {
+      var index = savedLocal.findIndex(function(savedHold) {
+        return savedHold.imdbid == saveObject.imdbid;
+      });
+
+      savedLocal.splice(index,1);
+      localStorage.setItem('savedList', JSON.stringify(savedLocal));
+
+      $(this).prop("disabled",true);
+
+      if(selectedBtnText == "Saved Content") {
+        $('input[type=checkbox]').each(function(){
+          if($(this).attr("arrayIndex") > arrayIndex) {
+            $(this).attr("arrayIndex",$(this).attr("arrayIndex")-1);
+          }
+        });
+      }   
+    }
+  });
 
 });
