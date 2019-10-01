@@ -9,6 +9,8 @@ $(document).ready(function () {
   if(savedLocal == null) {
     savedLocal = [];
   }
+  console.log(netflixNewLocal);
+  console.log(netflixExpiresLocal);
 
   $('#newContent').on('click', loadNewContent);
   $('#expiringContent').on('click', loadExpiringContent);
@@ -34,9 +36,7 @@ $(document).ready(function () {
       $.ajax(settingsExpiring).then(function (netflixResponse) {
         var netflixExpiresSoon = netflixResponse;
         
-        if(netflixExpiresLocal != null) {
-          netflixExpiresLocal.timeStamp = moment().format("MM/DD/YY");
-        }
+        netflixExpiresSoon.timeStamp = moment().format("MM/DD/YY");
 
         for (let i = 0; i < netflixResponse.ITEMS.length; i++) {
           if (netflixResponse.ITEMS[i].imdbid != "") {
@@ -47,11 +47,10 @@ $(document).ready(function () {
               url: queryURL,
               method: "GET"
             }).then(function (omdbResponse) {
-              console.log(omdbResponse);
               netflixExpiresSoon.ITEMS[i].omdbData = omdbResponse;
               localStorage.setItem('netflixExpireSoon', JSON.stringify(netflixExpiresSoon));
 
-              addContentRow(omdbResponse, i);
+              addContentRow(omdbResponse, i, netflixExpiresSoon.ITEMS[i].netflixid);
             });
           }
         }   
@@ -60,7 +59,7 @@ $(document).ready(function () {
     } else {
       for (let i = 0; i < netflixExpiresLocal.ITEMS.length; i++) {
         if (netflixExpiresLocal.ITEMS[i].imdbid != "") {
-          addContentRow(netflixExpiresLocal.ITEMS[i].omdbData, i);
+          addContentRow(netflixExpiresLocal.ITEMS[i].omdbData, i, netflixExpiresLocal.ITEMS[i].netflixid);
         }
       }
 
@@ -93,12 +92,10 @@ $(document).ready(function () {
       }
 
       $.ajax(settingsNew).done(function (netflixResponse) {
-        console.log(netflixResponse);
-  
         var netflixNew = netflixResponse;
-        if(netflixNewLocal != null){
-          netflixNewLocal.timeStamp = moment().format("MM/DD/YY");
-        }
+        
+        netflixNew.timeStamp = moment().format("MM/DD/YY");
+        netflixNew.pullNumber = "10";
 
         for (let i = 0; i < netflixResponse.ITEMS.length; i++) {
           if (netflixResponse.ITEMS[i].imdbid != "") {
@@ -112,7 +109,7 @@ $(document).ready(function () {
               netflixNew.ITEMS[i].omdbData = omdbResponse;
               localStorage.setItem('netflixNew', JSON.stringify(netflixNew));
 
-              addContentRow(omdbResponse, i);
+              addContentRow(omdbResponse, i, netflixNew.ITEMS[i].netflixid);
             });
           }
         }
@@ -130,10 +127,15 @@ $(document).ready(function () {
   });
 
   //adds content rows
-  function addContentRow(omdbObject, itemIndex) {
+  function addContentRow(omdbObject, itemIndex, netflixid) {
     if(omdbObject.Response == "True") {
       var newRow = $('<tr data-toggle="collapse" data-target="#collapse' + itemIndex + '" class="clickable">');
-      newRow.append($('<td style="font-weight:bold;">').text(omdbObject.Title));
+      
+      var linkTD = $('<td style="font-weight:bold;">');
+      var linkNetflix = $('<a href="https://www.netflix.com/watch/'+netflixid+'" target="_blank">'+omdbObject.Title+'</a>');
+      linkTD.append(linkNetflix);
+      newRow.append(linkTD);
+
       
       if (omdbObject.Poster === "N/A"){
         var posterTD =$("<td>");
@@ -158,7 +160,7 @@ $(document).ready(function () {
       newRow.append($("<td>").text(omdbObject.imdbVotes));
 
       var newWatchedTD = $("<td>");
-      var newCheckbox = $('<input type="checkbox" arrayIndex="'+itemIndex+'">');
+      var newCheckbox = $('<input type="checkbox" class="custom-control-input" id="customCheck" arrayIndex="'+itemIndex+'">');
       if(savedLocal.findIndex(function(savedHold) {return savedHold.imdbid == omdbObject.imdbID;}) != -1) {
         newCheckbox.prop('checked', true);
       }
