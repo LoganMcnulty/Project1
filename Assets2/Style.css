@@ -54,7 +54,7 @@ li {
   
 .profile-icon:hover{
    border-style: solid;
-  border-width: 10px;
+  border-width: 2px;
     border-color: white;
     outline: 0;
     -webkit-box-shadow: inset 5px rgba(0,0,0,.075), 0 0 8px rgba(102, 175, 233, 0.6);

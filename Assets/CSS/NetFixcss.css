@@ -21,9 +21,11 @@ body{
 #about{
     opacity: .9;
     color:whitesmoke;
-    border: solid red 3px;
+    border: solid red 5px;
     padding:1%;
     border-radius:15px;
+    justify-content: center;
+    text-align: center;
 }
 
 #whatsNew_whatsLeaving{
@@ -91,9 +93,33 @@ th{
 }
 
 p {
-    font-family: 'Cabin', sans-serif;
+    /* font-family: 'Cabin', sans-serif; */
     font-size: 18px;
 }
 h1 {
     font-family: 'Cabin', sans-serif;
+}
+.learn {
+    /* color: green;
+    border-color: black; */
+
+    background-color: red;
+    border: none;
+    color: white;
+    padding: 15px 32px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+    margin: 4px 2px;
+    cursor: pointer;
+}
+
+.learn:hover{
+    border-style: solid;
+  border-width: 2px;
+    border-color: white;
+    outline: 0;
+    -webkit-box-shadow: inset 5px rgba(0,0,0,.075), 0 0 8px rgba(102, 175, 233, 0.6);
+    box-shadow: inset 5px rgba(0,0,0,.075), 0 0 8px rgba(102, 175, 233, 0.6);
 }
