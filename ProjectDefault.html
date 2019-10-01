@@ -23,7 +23,7 @@
 
   <!-- Bootstrap link -->
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
-
+    <link href="https://fonts.googleapis.com/css?family=Cabin|Merriweather|Varela+Round&display=swap" rel="stylesheet">
 </head>
 
 <body>
@@ -39,10 +39,12 @@
   <div class="row justify-content-around">
 
     <!-- About -->
-      <div class="col-6 mr-auto" id="about">
+      <div class="col-6 mr-auto" id="about">'
+        <br>
         <h1>
           About This Product:
         </h1>
+        <br>
           <p  style="font-weight:bold;">Get the most out of your Netflix Subscription by using NetFIX to query the Netflix database for titles recently added, or titles being staged for removal.
             Once you have made your selection, results are displayed in order of IMDB rating. Additional information available. 
           </p>
@@ -50,9 +52,9 @@
 
     <!-- Do you want what's new, or what's leaving? -->
       <div class="col-5" id="whatsNew_whatsLeaving">
-        <button type="button" class="btn btn-primary btn-lg btn-block" id="newContent" style="background:black; color:red">What's New?</button>
-        <button type="button" class="btn btn-secondary btn-lg btn-block" id="expiringContent">What's Leaving?</button>
-        <button type="button" class="btn btn-secondary btn-lg btn-block" id="savedContent">Load Saved Content</button>
+        <button type="button" class="btn btn-primary btn-lg btn-block" id="newContent" style="background:black; color: white">What's New?</button>
+        <button type="button" class="btn btn-primary btn-lg btn-block" id="expiringContent" style="background:black; color:white">What's Leaving?</button>
+        <button type="button" class="btn btn-primary btn-lg btn-block" id="savedContent" style="background:black; color:white">Load Saved Content</button>
       </div>
   </div>
 
@@ -65,15 +67,15 @@
             <table class="table" id="empTable">
                 <thead>
                   <tr>
-                    <th scope="col">Title Name</th>
-                    <th scope="col">Poster</th>
-                    <th scope="col">Genre</th>
-                    <th scope="col">Rated</th>
-                    <th scope="col">Run Time</th>
-                    <th scope="col">Year</th>
-                    <th scope="col">IMDB Rating</th>
-                    <th scope="col">IMDB Popularity</th>
-                    <th scope="col">Watched?</th>
+                    <th scope="col" class = "sort">Title Name</th>
+                    <th scope="col" class = "sort">Poster</th>
+                    <th scope="col" class = "sort">Genre</th>
+                    <th scope="col" class = "sort">Rated</th>
+                    <th scope="col" class = "sort">Run Time</th>
+                    <th scope="col" class = "sort">Year</th>
+                    <th scope="col" class = "sort">IMDB Rating</th>
+                    <th scope="col" class = "sort">IMDB Popularity</th>
+                    <th scope="col" class = "sort">Watched?</th>
                   </tr>
                 </thead>
                 <tbody id="titleContainer">
