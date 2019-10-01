@@ -1,5 +1,7 @@
 $(document).ready(function () {
 
+  var dayCountInitial
+
   var netflixExpiresLocal = JSON.parse(localStorage.getItem("netflixExpireSoon"));
   var netflixNewLocal = JSON.parse(localStorage.getItem("netflixNew"));
   var savedLocal = JSON.parse(localStorage.getItem("savedList"));
@@ -74,8 +76,10 @@ $(document).ready(function () {
     //resets table body
     $('#empTable').DataTable().destroy();
     $("#empTable tbody").empty();
-    if (netflixNewLocal == null || moment().format("MM/DD/YY") > netflixNewLocal.timeStamp) {
-      var daysSinceRelease = 7;
+
+      var daysSinceRelease = $("#day-count").val();
+      console.log(daysSinceRelease);
+      // var daysSinceRelease = 7;
       var resultsPage = 1;
       var settingsNew = {
         "async": true,
@@ -114,15 +118,6 @@ $(document).ready(function () {
         }
         netflixNewLocal = netflixNew;
       });
-    } else {
-      for (let i = 0; i < netflixNewLocal.ITEMS.length; i++) {
-        if (netflixNewLocal.ITEMS[i].imdbid != "") {
-          addContentRow(netflixNewLocal.ITEMS[i].omdbData, i);
-        }
-      }
-      $("#empTable").DataTable();
-      $(".dataTables_length").addClass("bs-select");
-    }
 
     $("#tableHeader").text("New Content");
   }
