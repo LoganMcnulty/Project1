@@ -160,7 +160,7 @@ $(document).ready(function () {
       newRow.append($("<td>").text(omdbObject.imdbVotes));
 
       var newWatchedTD = $("<td>");
-      var newCheckbox = $('<input type="checkbox" class="custom-control-input" id="customCheck" arrayIndex="'+itemIndex+'">');
+      var newCheckbox = $('<input type="checkbox" arrayIndex="'+itemIndex+'">');
       if(savedLocal.findIndex(function(savedHold) {return savedHold.imdbid == omdbObject.imdbID;}) != -1) {
         newCheckbox.prop('checked', true);
       }
@@ -209,9 +209,8 @@ $(document).ready(function () {
       savedLocal.splice(index,1);
       localStorage.setItem('savedList', JSON.stringify(savedLocal));
 
-      $(this).prop("disabled",true);
-
       if(selectedBtnText == "Saved Content") {
+        $(this).prop("disabled",true);
         $('input[type=checkbox]').each(function(){
           if($(this).attr("arrayIndex") > arrayIndex) {
             $(this).attr("arrayIndex",$(this).attr("arrayIndex")-1);
